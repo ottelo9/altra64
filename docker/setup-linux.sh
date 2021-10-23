@@ -89,6 +89,8 @@ cd ..
 apt-get -y autoremove
 apt-get autoclean
 
-echo 'export N64_INST=/usr/local/libdragon' >> ~/.bashrc
-echo 'export PATH="$PATH:$N64_INST/bin"' >> ~/.bashrc
+find /usr/local/libdragon/bin /usr/local/libdragon/mips64-elf/bin /usr/local/libdragon/libexec/gcc/mips64-elf -type f -print0 | xargs -0 strip || true
 
+# these are ENV in Dockerfile now
+#echo 'export N64_INST=/usr/local/libdragon' >> ~/.bashrc
+#echo 'export PATH="$PATH:$N64_INST/bin"' >> ~/.bashrc
