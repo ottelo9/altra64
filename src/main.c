@@ -1635,7 +1635,7 @@ int saveTypeFromSd(display_context_t disp, char *rom_name, int stype)
     printText("Finding latest save slot...", 3, -1, disp);
     display_show(disp);
     while (true) {
-        sprintf(fname, "/"ED64_FIRMWARE_PATH"/%s/%s.%04x.%s", save_path, rom_name, save_count, save_type_extension);
+        sprintf(fname, "/"ED64_FIRMWARE_PATH"/%s/%s.%04d.%s", save_path, rom_name, save_count, save_type_extension);
         result = f_stat (fname, &fnoba);
         if (result != FR_OK) {
             // we found our first missing save slot, break
@@ -1645,9 +1645,9 @@ int saveTypeFromSd(display_context_t disp, char *rom_name, int stype)
     }
     if (save_count > 0) {
         // we've went 1 past the end, so back up
-        sprintf(fname, "Found latest save slot: %04x", --save_count);
+        sprintf(fname, "Found latest save slot: %04d", --save_count);
         printText(fname, 3, -1, disp);
-        sprintf(fname, "/"ED64_FIRMWARE_PATH"/%s/%s.%04x.%s", save_path, rom_name, save_count, save_type_extension);
+        sprintf(fname, "/"ED64_FIRMWARE_PATH"/%s/%s.%04d.%s", save_path, rom_name, save_count, save_type_extension);
     } else {
         // not even a 0000 was found, so look at the original name before numbering was implemented
         printText("No save slot found!", 3, -1, disp);
@@ -1737,7 +1737,7 @@ int saveTypeToSd(display_context_t disp, char *rom_name, int stype)
     printText("Finding unused save slot...", 3, -1, disp);
     display_show(disp);
     while (true) {
-        sprintf(fname, "/"ED64_FIRMWARE_PATH"/%s/%s.%04x.%s", save_path, rom_name, save_count, save_type_extension);
+        sprintf(fname, "/"ED64_FIRMWARE_PATH"/%s/%s.%04d.%s", save_path, rom_name, save_count, save_type_extension);
         result = f_stat (fname, &fnoba);
         if (result != FR_OK) {
             // we found our first missing save slot, break
@@ -1745,10 +1745,10 @@ int saveTypeToSd(display_context_t disp, char *rom_name, int stype)
         }
         ++save_count;
     }
-    sprintf(fname, "Found unused save slot: %04x", save_count);
+    sprintf(fname, "Found unused save slot: %04d", save_count);
     printText(fname, 3, -1, disp);
     display_show(disp);
-    sprintf(fname, "/"ED64_FIRMWARE_PATH"/%s/%s.%04x.%s", save_path, rom_name, save_count, save_type_extension);
+    sprintf(fname, "/"ED64_FIRMWARE_PATH"/%s/%s.%04d.%s", save_path, rom_name, save_count, save_type_extension);
 
     int size = saveTypeToSize(stype); // int byte
     TRACEF(disp, "size for save=%i", size);
