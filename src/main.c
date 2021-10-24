@@ -2241,6 +2241,37 @@ void bootRom(display_context_t disp, int silent)
 {
     if (boot_cic != 0)
     {
+        // first load cheats if enabled, and error out if we can't
+        u32 *cheat_lists[2] = {NULL, NULL};
+        if (cheats_on)
+        {
+            gCheats = 1;
+            printText("try to load cheat-file...", 3, -1, disp);
+
+            char cheat_filename[64];
+            sprintf(cheat_filename, "/"ED64_FIRMWARE_PATH"/CHEATS/%s.yml", rom_filename);
+
+            int ok = readCheatFile(cheat_filename, cheat_lists);
+            if (ok == 0)
+            {
+                printText("cheats found...", 3, -1, disp);
+            }
+            else
+            {
+                printText("cheats not found", 3, -1, disp);
+                printText("or parsing failed", 3, -1, disp);
+                printText("reset console...", 3, -1, disp);
+                gCheats = 0;
+                while(true) {
+                    sleep(20000);
+                }
+            }
+        }
+        else
+        {
+            gCheats = 0;
+        }
+
         if (boot_save != 0)
         {
             TCHAR cfg_file[MAX_SUPPORTED_PATH_LEN];
@@ -2283,32 +2314,6 @@ void bootRom(display_context_t disp, int silent)
         u32 info = *(vu32 *)0xB000003C;
         cart = info >> 16;
         country = (info >> 8) & 0xFF;
-
-        u32 *cheat_lists[2] = {NULL, NULL};
-        if (cheats_on)
-        {
-            gCheats = 1;
-            printText("try to load cheat-file...", 3, -1, disp);
-
-            char cheat_filename[64];
-            sprintf(cheat_filename, "/"ED64_FIRMWARE_PATH"/CHEATS/%s.yml", rom_filename);
-
-            int ok = readCheatFile(cheat_filename, cheat_lists);
-            if (ok == 0)
-            {
-                printText("cheats found...", 3, -1, disp);
-            }
-            else
-            {
-                printText("cheats not found...", 3, -1, disp);
-                sleep(2000);
-                gCheats = 0;
-            }
-        }
-        else
-        {
-            gCheats = 0;
-        }
 
         disable_interrupts();
         int bios_cic = getCicType(1);
