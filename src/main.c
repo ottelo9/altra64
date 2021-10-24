@@ -40,6 +40,7 @@
 // YAML parser
 #include <yaml.h>
 
+#include "constants.h"
 #include "debug.h"
 #include "mem.h"
 #include "chksum64.h"
@@ -49,21 +50,11 @@
 #include "menu.h"
 #include "cic.h"
 
-#define ED64PLUS
-
-#ifdef ED64PLUS
-#define ED64_FIRMWARE_PATH "ED64P"
-#else
-#define ED64_FIRMWARE_PATH "ED64"
-#endif
-
 #ifdef USE_TRUETYPE
 #define STB_TRUETYPE_IMPLEMENTATION
 #include "stb_truetype.h"
 
 #define MAX_LIST 20
-
-#define MAX_SUPPORTED_PATH_LEN 256
 
 struct glyph
 {
