@@ -1,0 +1,22 @@
+name: Build and release
+on:
+  push:
+    tags:
+      - "v*.*.*"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Set env
+      run: echo ::set-env name=RELEASE_VERSION::$(echo ${GITHUB_REF:10})
+    - name: Build the Docker image
+      run: cd ./docker && docker build . --file Dockerfile --tag altra64-dev:$RELEASE_VERSION
+    - name: Build and generate artifact
+      run: ./tools/release-deploy.sh
+    - name: GH Release
+      uses: softprops/action-gh-release@v0.1.13
+      with:
+        files: ./release/ED64P-${{ env.RELEASE_VERSION }}.zip
+
