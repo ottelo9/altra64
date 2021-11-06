@@ -8,15 +8,23 @@
 #FROM ubuntu:18.04
 FROM ubuntu:16.04
 
+ARG INSTALL_DEPS="wget build-essential git texinfo libc6 libgmp-dev libmpfr-dev libmpc-dev libpng-dev zlib1g-dev libtool autoconf"
+
+RUN apt-get update \
+    && apt-get -y upgrade \ 
+    && apt-get -y install ${INSTALL_DEPS} \
+    && apt-get -y autoremove \
+    && apt-get autoclean
+
 ENV N64_INST=/usr/local/libdragon
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/libdragon/bin
 
 RUN mkdir /build
 
-COPY setup-linux.sh /usr/bin/setup-linux.sh
+COPY setup-docker.sh /usr/bin/setup-docker.sh
 
 # run it then delete all build artifacts
-RUN /usr/bin/setup-linux.sh && rm -rf /root/*
+RUN /usr/bin/setup-docker.sh && rm -rf /root/*
 
 VOLUME [ "/build" ]
 
