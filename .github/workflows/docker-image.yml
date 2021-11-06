@@ -12,7 +12,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Set env
-      run: echo ::set-env name=RELEASE_VERSION::$(echo ${GITHUB_REF:10})
+      run: echo "RELEASE_VERSION=$(echo ${GITHUB_REF:10})" >> $GITHUB_ENV
     - name: Build the Docker image
       run: cd ./docker && docker build . --file Dockerfile --tag altra64-dev:$RELEASE_VERSION
     - name: Build and generate artifact
