@@ -1,5 +1,7 @@
 # Altra64
 
+[![Build and release](https://github.com/adrianopteodoro/altra64/actions/workflows/docker-image.yml/badge.svg)](https://github.com/adrianopteodoro/altra64/actions/workflows/docker-image.yml)
+
 Alternative Everdrive64 menu
 
 `Altra64` is an open source menu for [Everdrive64](http://krikzz.com/) and ed64+ and is based on a fork of alt64 which was
