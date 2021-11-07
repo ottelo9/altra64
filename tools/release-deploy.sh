@@ -1,7 +1,7 @@
 #!/bin/bash
 EXEC_DIR=$(pwd)
 RELEASE_ARTIFACT="ED64P-$RELEASE_VERSION.zip"
-docker run --rm -v "$EXEC_DIR:/build" $REGISTRY/$IMAGE_NAME make
+docker run --rm -v "$EXEC_DIR:/build" ${REGISTRY}/${IMAGE_NAME}:docker make
 
 # make the release dirs
 
