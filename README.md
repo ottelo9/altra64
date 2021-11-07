@@ -1,6 +1,6 @@
 # Altra64
 
-[![Build and release](https://github.com/adrianopteodoro/altra64/actions/workflows/docker-image.yml/badge.svg)](https://github.com/adrianopteodoro/altra64/actions/workflows/docker-image.yml)
+[![Build and release](https://github.com/adrianopteodoro/altra64/actions/workflows/build-release.yml/badge.svg)](https://github.com/adrianopteodoro/altra64/actions/workflows/build-release.yml)
 
 Alternative Everdrive64 menu
 
