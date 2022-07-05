@@ -18,7 +18,7 @@ To build the Rom
 
 from the projects root directory, with docker installed
 
-$ docker run --rm -v "$(pwd):/build" moparisthebest/altra64-dev make
+``$ docker run --rm -v "$(pwd):/build" moparisthebest/altra64-dev make``
 
 If it all worked, you will find `OS64.v64` in the `bin` directory.
 
@@ -29,6 +29,6 @@ Finally, we can clean the build objects from the project
 
 from the projects root directory
 
-$ docker run --rm -v "$(pwd):/build" moparisthebest/altra64-dev make clean
+``$ docker run --rm -v "$(pwd):/build" moparisthebest/altra64-dev make clean``
 
 Enjoy!
