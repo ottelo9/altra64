@@ -8,15 +8,15 @@
 #FROM ubuntu:18.04
 FROM ubuntu:16.04
 
+ENV N64_INST=/usr/local/libdragon
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/libdragon/bin
+
 RUN mkdir /build
 
 COPY setup-linux.sh /usr/bin/setup-linux.sh
 
 # run it then delete all build artifacts
 RUN /usr/bin/setup-linux.sh && rm -rf /root/*
-
-ENV N64_INST=/usr/local/libdragon
-ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/libdragon/bin
 
 VOLUME [ "/build" ]
 

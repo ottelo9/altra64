@@ -40,6 +40,7 @@
 // YAML parser
 #include <yaml.h>
 
+#include "constants.h"
 #include "debug.h"
 #include "mem.h"
 #include "chksum64.h"
@@ -48,14 +49,6 @@
 #include "memorypak.h"
 #include "menu.h"
 #include "cic.h"
-
-#define ED64PLUS
-
-#ifdef ED64PLUS
-#define ED64_FIRMWARE_PATH "ED64P"
-#else
-#define ED64_FIRMWARE_PATH "ED64"
-#endif
 
 #ifdef USE_TRUETYPE
 #define STB_TRUETYPE_IMPLEMENTATION
@@ -192,7 +185,7 @@ int save_after_reboot = 0;
 unsigned char cartID[4];
 char curr_dirname[64];
 char pwd[64];
-TCHAR rom_filename[256];
+TCHAR rom_filename[MAX_SUPPORTED_PATH_LEN];
 
 u32 rom_buff[128]; //rom buffer
 u8 *rom_buff8;     //rom buffer
@@ -930,7 +923,7 @@ void clearScreen(display_context_t disp)
 
 void romInfoScreen(display_context_t disp, u8 *buff, int silent)
 {
-    TCHAR filename[64];
+    TCHAR filename[MAX_SUPPORTED_PATH_LEN];
     sprintf(filename, "%s", buff);
 
     int swapped = 0;
@@ -1353,7 +1346,7 @@ void loadrom(display_context_t disp, u8 *buff, int fast)
 
     printText("Loading ROM, Please wait:", 3, 4, disp);
 
-    TCHAR filename[64];
+    TCHAR filename[MAX_SUPPORTED_PATH_LEN];
     sprintf(filename, "%s", buff);
 
     FRESULT result;
@@ -1531,7 +1524,7 @@ void loadrom(display_context_t disp, u8 *buff, int fast)
 int backupSaveData(display_context_t disp)
 {
     //backup cart-save on sd after reboot
-    TCHAR config_file_path[32];
+    TCHAR config_file_path[MAX_SUPPORTED_PATH_LEN];
     sprintf(config_file_path, "/"ED64_FIRMWARE_PATH"/%s/LASTROM.CFG", save_path);
 
     u8 save_format;
@@ -1640,14 +1633,14 @@ int saveTypeFromSd(display_context_t disp, char *rom_name, int stype)
 {
     TRACE(disp, rom_filename);
     const char* save_type_extension = saveTypeToExtension(stype, ext_type);
-    TCHAR fname[256] = {0};
+    TCHAR fname[MAX_SUPPORTED_PATH_LEN] = {0};
     int save_count = 0; //TODO: once this crosses 9999 bad infinite-loop type things happen, look into that one day
     FRESULT result;
     FILINFO fnoba;
     printText("Finding latest save slot...", 3, -1, disp);
     display_show(disp);
     while (true) {
-        sprintf(fname, "/"ED64_FIRMWARE_PATH"/%s/%s.%04x.%s", save_path, rom_name, save_count, save_type_extension);
+        sprintf(fname, "/"ED64_FIRMWARE_PATH"/%s/%s.%04d.%s", save_path, rom_name, save_count, save_type_extension);
         result = f_stat (fname, &fnoba);
         if (result != FR_OK) {
             // we found our first missing save slot, break
@@ -1657,9 +1650,9 @@ int saveTypeFromSd(display_context_t disp, char *rom_name, int stype)
     }
     if (save_count > 0) {
         // we've went 1 past the end, so back up
-        sprintf(fname, "Found latest save slot: %04x", --save_count);
+        sprintf(fname, "Found latest save slot: %04d", --save_count);
         printText(fname, 3, -1, disp);
-        sprintf(fname, "/"ED64_FIRMWARE_PATH"/%s/%s.%04x.%s", save_path, rom_name, save_count, save_type_extension);
+        sprintf(fname, "/"ED64_FIRMWARE_PATH"/%s/%s.%04d.%s", save_path, rom_name, save_count, save_type_extension);
     } else {
         // not even a 0000 was found, so look at the original name before numbering was implemented
         printText("No save slot found!", 3, -1, disp);
@@ -1742,14 +1735,14 @@ int saveTypeToSd(display_context_t disp, char *rom_name, int stype)
 {
     //after reset create new savefile
     const char* save_type_extension = saveTypeToExtension(stype, ext_type);
-    TCHAR fname[256]; //TODO: change filename buffers to 256!!!
+    TCHAR fname[MAX_SUPPORTED_PATH_LEN];
     int save_count = 0; //TODO: once this crosses 9999 bad infinite-loop type things happen, look into that one day
     FRESULT result;
     FILINFO fnoba;
     printText("Finding unused save slot...", 3, -1, disp);
     display_show(disp);
     while (true) {
-        sprintf(fname, "/"ED64_FIRMWARE_PATH"/%s/%s.%04x.%s", save_path, rom_name, save_count, save_type_extension);
+        sprintf(fname, "/"ED64_FIRMWARE_PATH"/%s/%s.%04d.%s", save_path, rom_name, save_count, save_type_extension);
         result = f_stat (fname, &fnoba);
         if (result != FR_OK) {
             // we found our first missing save slot, break
@@ -1757,10 +1750,10 @@ int saveTypeToSd(display_context_t disp, char *rom_name, int stype)
         }
         ++save_count;
     }
-    sprintf(fname, "Found unused save slot: %04x", save_count);
+    sprintf(fname, "Found unused save slot: %04d", save_count);
     printText(fname, 3, -1, disp);
     display_show(disp);
-    sprintf(fname, "/"ED64_FIRMWARE_PATH"/%s/%s.%04x.%s", save_path, rom_name, save_count, save_type_extension);
+    sprintf(fname, "/"ED64_FIRMWARE_PATH"/%s/%s.%04d.%s", save_path, rom_name, save_count, save_type_extension);
 
     int size = saveTypeToSize(stype); // int byte
     TRACEF(disp, "size for save=%i", size);
@@ -1810,7 +1803,7 @@ int saveTypeToSd(display_context_t disp, char *rom_name, int stype)
 //check out the userfriendly ini file for config-information
 int readConfigFile(void)
 {
-    TCHAR filename[32];
+    TCHAR filename[MAX_SUPPORTED_PATH_LEN];
     sprintf(filename, "/"ED64_FIRMWARE_PATH"/ALT64.INI");
 
     FRESULT result;
@@ -1926,7 +1919,7 @@ void readSDcard(display_context_t disp, char *directory)
     //     for (int i = 0; i < dir->size; i++)
     //     {
     //         frec = dir->rec[i];
-    //         u8 rom_cfg_file[128];
+    //         u8 rom_cfg_file[MAX_SUPPORTED_PATH_LEN];
 
     //         //set rom_cfg
     //         sprintf(rom_cfg_file, "/"ED64_FIRMWARE_PATH"/CFG/%s", frec->name);
@@ -2254,9 +2247,40 @@ void bootRom(display_context_t disp, int silent)
 {
     if (boot_cic != 0)
     {
+        // first load cheats if enabled, and error out if we can't
+        u32 *cheat_lists[2] = {NULL, NULL};
+        if (cheats_on)
+        {
+            gCheats = 1;
+            printText("try to load cheat-file...", 3, -1, disp);
+
+            char cheat_filename[64];
+            sprintf(cheat_filename, "/"ED64_FIRMWARE_PATH"/CHEATS/%s.yml", rom_filename);
+
+            int ok = readCheatFile(cheat_filename, cheat_lists);
+            if (ok == 0)
+            {
+                printText("cheats found...", 3, -1, disp);
+            }
+            else
+            {
+                printText("cheats not found", 3, -1, disp);
+                printText("or parsing failed", 3, -1, disp);
+                printText("reset console...", 3, -1, disp);
+                gCheats = 0;
+                while(true) {
+                    sleep(20000);
+                }
+            }
+        }
+        else
+        {
+            gCheats = 0;
+        }
+
         if (boot_save != 0)
         {
-            TCHAR cfg_file[32];
+            TCHAR cfg_file[MAX_SUPPORTED_PATH_LEN];
 
             //set cfg file with last loaded cart info and save-type
             sprintf(cfg_file, "/"ED64_FIRMWARE_PATH"/%s/LASTROM.CFG", save_path);
@@ -2296,32 +2320,6 @@ void bootRom(display_context_t disp, int silent)
         u32 info = *(vu32 *)0xB000003C;
         cart = info >> 16;
         country = (info >> 8) & 0xFF;
-
-        u32 *cheat_lists[2] = {NULL, NULL};
-        if (cheats_on)
-        {
-            gCheats = 1;
-            printText("try to load cheat-file...", 3, -1, disp);
-
-            char cheat_filename[64];
-            sprintf(cheat_filename, "/"ED64_FIRMWARE_PATH"/CHEATS/%s.yml", rom_filename);
-
-            int ok = readCheatFile(cheat_filename, cheat_lists);
-            if (ok == 0)
-            {
-                printText("cheats found...", 3, -1, disp);
-            }
-            else
-            {
-                printText("cheats not found...", 3, -1, disp);
-                sleep(2000);
-                gCheats = 0;
-            }
-        }
-        else
-        {
-            gCheats = 0;
-        }
 
         disable_interrupts();
         int bios_cic = getCicType(1);
@@ -2450,7 +2448,7 @@ void drawShortInfoBox(display_context_t disp, char *text, u8 mode)
 
 void readRomConfig(display_context_t disp, char *short_filename, char *full_filename)
 {
-    TCHAR cfg_filename[256];
+    TCHAR cfg_filename[MAX_SUPPORTED_PATH_LEN];
     sprintf(rom_filename, "%s", short_filename);
     rom_filename[strlen(rom_filename) - 4] = '\0'; // cut extension
     sprintf(cfg_filename, "/"ED64_FIRMWARE_PATH"/CFG/%s.CFG", rom_filename);
@@ -2688,8 +2686,8 @@ void drawToplistBox(display_context_t disp, int line)
                     // if (res != FR_OK) break;
                     // path[i] = 0;
                 } else {                                       /* It is a file. */
-                    TCHAR rom_cfg_file[128];
-
+                    TCHAR rom_cfg_file[MAX_SUPPORTED_PATH_LEN];
+                    
                     //set rom_cfg
                     sprintf(rom_cfg_file, path, fno.fname);
 
@@ -4270,7 +4268,7 @@ void handleInput(display_context_t disp, sprite_t *contr)
             else
                 sprintf(name_file, "%s/%s", pwd, list[cursor].filename);
 
-            TCHAR rom_cfg_file[128];
+            TCHAR rom_cfg_file[MAX_SUPPORTED_PATH_LEN];
 
             u8 resp = 0;
 

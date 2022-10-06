@@ -7,6 +7,7 @@
 #include <libdragon.h>
 #include <string.h>
 #include <stdio.h>
+#include "constants.h"
 #include "types.h"
 #include "mempak.h"
 #include "memorypak.h"
@@ -382,14 +383,14 @@ void view_mpk(display_context_t disp)
 //old function to dump a mempak to a file
 void mpk_to_file(display_context_t disp, char *mpk_filename, int quick)
 {
-    u8 buff[64];
+    u8 buff[MAX_SUPPORTED_PATH_LEN];
     u8 v = 0;
     u8 ok = 0;
 
     if (quick)
-        sprintf(buff, "%s%s", mempak_path, mpk_filename);
+        sprintf(buff, "/"ED64_FIRMWARE_PATH"/%s/%s", mempak_path, mpk_filename);
     else
-        sprintf(buff, "%s%s.MPK", mempak_path, mpk_filename);
+        sprintf(buff, "/"ED64_FIRMWARE_PATH"/%s/%s.MPK", mempak_path, mpk_filename);
 
     FRESULT fr;
     FILINFO fno;
@@ -403,7 +404,7 @@ void mpk_to_file(display_context_t disp, char *mpk_filename, int quick)
         else
             while (fr == FR_OK)
             {
-                sprintf(buff, "%s%s%i.MPK", mempak_path, mpk_filename, v);
+                sprintf(buff, "/"ED64_FIRMWARE_PATH"/%s/%s.%i.MPK", mempak_path, mpk_filename, v);
 
                 fr = f_stat(buff, &fno);
                 if (fr == FR_OK)
