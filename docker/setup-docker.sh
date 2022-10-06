@@ -6,26 +6,15 @@
 
 set -euxo pipefail
 
-# Download and install latest updates for the system [sudo req.]
-apt-get update
-apt-get -y upgrade
-
-# Install essential packages [sudo req.]
-apt-get -y install wget build-essential git texinfo libc6 libgmp-dev libmpfr-dev libmpc-dev libpng-dev zlib1g-dev libtool autoconf
-
 # change to the users root directory
-cd ~/
+cd $HOME
 
-# add a system variable and make it perminent
-# echo 'N64_INST=/usr/local/libdragon' >> /etc/environment
-# echo 'export N64_INST=/usr/local/libdragon' >> ~/.bashrc
-export N64_INST=/usr/local/libdragon
-# source ~/.bashrc
+#wget -c https://github.com/anacierdem/libdragon-docker/releases/download/v10.2.1/libdragon-linux-x86_64.tar.gz -O - | tar -xz
 
 # Pull the latest libdragon source code and make a build directory
 git clone https://github.com/dragonminded/libdragon.git
 # set to correct commit
-cd libdragon && git checkout b26fce6 && cd ..
+cd libdragon && git checkout --force b26fce6 && cd ..
 
 # fix issues with the build scripts
 sed -i -- 's|${N64_INST:-/usr/local}|/usr/local/libdragon|g' libdragon/tools/build
@@ -85,12 +74,4 @@ make install
 
 cd ..
 
-# Perform cleanup
-apt-get -y autoremove
-apt-get autoclean
-
 find /usr/local/libdragon/bin /usr/local/libdragon/mips64-elf/bin /usr/local/libdragon/libexec/gcc/mips64-elf -type f -print0 | xargs -0 strip || true
-
-# these are ENV in Dockerfile now
-#echo 'export N64_INST=/usr/local/libdragon' >> ~/.bashrc
-#echo 'export PATH="$PATH:$N64_INST/bin"' >> ~/.bashrc

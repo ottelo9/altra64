@@ -1901,6 +1901,14 @@ void initFilesystem(void)
     }
 }
 
+int showThisFolder(int hide_sysfolder, char* fname)
+{
+    if (hide_sysfolder && strcmp(fname, "System Volume Information") == 0) return 0;
+    if (hide_sysfolder && strcmp(fname, "ED64") == 0) return 0;
+    if (hide_sysfolder && strcmp(fname, "ED64P") == 0) return 0;
+    return 1;
+}
+
 //prints the sdcard-filesystem content
 void readSDcard(display_context_t disp, char *directory)
 { //TODO: readd coloured list? use a hash table...
@@ -1976,7 +1984,7 @@ void readSDcard(display_context_t disp, char *directory)
         for (;;) {
             res = f_readdir(&dir, &fno);                   /* Read a directory item */
             if (res != FR_OK || fno.fname[0] == 0) break;  /* Break on error or end of dir */
-            if (!strcmp(fno.fname, "System Volume Information") == 0 || (!strcmp(fno.fname, "ED64") == 0 && hide_sysfolder == 0))
+            if (showThisFolder(hide_sysfolder, fno.fname))
             {
                 if (fno.fattrib & AM_DIR) {                    /* It is a directory */
                     list[count - 1].type = DT_DIR;
