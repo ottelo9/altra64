@@ -14,7 +14,7 @@ void menu_about(display_context_t disp)
     char firmware_str[32];
 
     sprintf(version_str, "Altra64: v%s", Altra64_GetVersionString());
-    printText(version_str, 9, 9, disp);
+    printText(version_str, 9, 7, disp);
     sprintf(firmware_str, "ED64 firmware: v%03x", evd_getFirmVersion());
     printText(firmware_str, 9, -1, disp);
     printText("by JonesAlmighty", 9, -1, disp);
