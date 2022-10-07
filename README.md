@@ -7,6 +7,30 @@ Alternative Everdrive64 menu
 `Altra64` is an open source menu for [Everdrive64](http://krikzz.com/) and ed64+ and is based on a fork of alt64 which was
 originally written by saturnu, and released on the
 [Everdrive64 forum](http://krikzz.com/forum/index.php?topic=816.0).
+## Setup
+
+Format your SD card to fat32.
+Extract ED64P.zip into the rout of your sd card.
+Change ALT64.ini To your hearts content.
+Add leagally obtained ROMs
+
+## Controls
+
+Key settings;
+L brings up the mempak menu
+      B abort
+      A backup
+      R format
+      Z view controller pak
+Z about screen
+A start rom/directory/mempak
+B back/cancel
+START start last rom
+C-left rom info / mempak content view
+C-right rom config  screen
+C-up view full filename
+C-down Toplist 15
+L+R delete files
 
 ## Building
 
