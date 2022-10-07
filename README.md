@@ -66,7 +66,7 @@ Finally, we can clean the build objects from the project
 from the projects root directory
 
 ```
-docker run --rm -v "$(pwd):/build" ghcr.io/ariahiro64/altra64:docker make clean
+docker run --rm -v "$(pwd):/build" ghcr.io/ariahiro64/altra64:master make clean
 ```
 
 ### Big thanks to the countless people who make altra64 possible!!! Enjoy!
