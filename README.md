@@ -9,14 +9,14 @@ originally written by saturnu, and released on the
 [Everdrive64 forum](http://krikzz.com/forum/index.php?topic=816.0).
 ## Setup
 
-Format your SD card to fat32.
+```Format your SD card to fat32.
 Extract ED64P.zip into the rout of your sd card.
 Change ALT64.ini To your hearts content.
-Add leagally obtained ROMs
+Add leagally obtained ROMs```
 
 ## Controls
 
-Key settings;
+```Key settings;
 L brings up the mempak menu
       B abort
       A backup
@@ -30,7 +30,7 @@ C-left rom info / mempak content view
 C-right rom config  screen
 C-up view full filename
 C-down Toplist 15
-L+R delete files
+L+R delete files```
 
 ## Building
 
