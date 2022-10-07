@@ -42,4 +42,4 @@ or
 
 ``$ docker run --rm -v "$(pwd):/build" ghcr.io/adrianopteodoro/altra64:docker make clean``
 
-Enjoy!
+### Big thanks to the countless people who make altra64 possible!!! Enjoy!
