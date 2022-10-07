@@ -1,7 +1,7 @@
 #!/bin/bash
 EXEC_DIR=$(pwd)
-RELEASE_ARTIFACT="ED64P-$RELEASE_VERSION.zip"
-docker run --rm -v "$EXEC_DIR:/build" ${REGISTRY}/${IMAGE_NAME}:docker make
+RELEASE_ARTIFACT="ED64P.zip"
+docker run --rm -v "$(pwd):/build" ghcr.io/adrianopteodoro/altra64:docker make
 
 # make the release dirs
 
@@ -10,10 +10,14 @@ if [ ! -f "$EXEC_DIR/bin/OS64P.v64" ]; then
     exit 1
 fi
 
-mkdir -p "$EXEC_DIR/release/ED64P" "$EXEC_DIR/release/ED64P/CFG" "$EXEC_DIR/release/ED64P/CHEATS" "$EXEC_DIR/release/ED64P/SDSAVE" "$EXEC_DIR/release/ED64P/WALLPAPER"
-cp "$EXEC_DIR/bin/OS64P.v64" "$EXEC_DIR/release/ED64P"
-cp "$EXEC_DIR/res/ALT64.INI" "$EXEC_DIR/release/ED64P"
-cp "$EXEC_DIR/res/WALLPAPER/bg.bmp" "$EXEC_DIR/release/ED64P/WALLPAPER"
-
+mkdir -p "$EXEC_DIR/release/ED64P/ED64P/CFG" "$EXEC_DIR/release/ED64P/ED64P/CHEATS" "$EXEC_DIR/release/ED64P/ED64P/SDSAVE" "$EXEC_DIR/release/ED64P/ED64P/WALLPAPER"
+cp "$EXEC_DIR/bin/OS64P.v64" "$EXEC_DIR/release/ED64P/ED64P"
+cp "$EXEC_DIR/res/ALT64.INI" "$EXEC_DIR/release/ED64P/ED64P"
+cp "$EXEC_DIR/res/WALLPAPER/bg.bmp" "$EXEC_DIR/release/ED64P/ED64P/WALLPAPER"
+cp "$EXEC_DIR/res/emulators/gb.v64" "$EXEC_DIR/release/ED64P/ED64P"
+cp "$EXEC_DIR/res/emulators/neon64bu.rom" "$EXEC_DIR/release/ED64P/ED64P"
+cp "$EXEC_DIR/res/emulators/ultraMSX2.z64" "$EXEC_DIR/release/ED64P/ED64P"
+cp "$EXEC_DIR/res/emulators/UltraSMS/z64" "$EXEC_DIR/release/ED64P/ED64P"
 cd "$EXEC_DIR/release"
+
 zip -9 -r $RELEASE_ARTIFACT .

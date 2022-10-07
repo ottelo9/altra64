@@ -1,6 +1,6 @@
 # Altra64
 
-[![Build and release](https://github.com/adrianopteodoro/altra64/actions/workflows/build-release.yml/badge.svg)](https://github.com/adrianopteodoro/altra64/actions/workflows/build-release.yml)
+[![Build and release](https://github.com/ariahiro64/altra64/actions/workflows/build-release.yml/badge.svg)](https://github.com/ariahiro64/altra64/actions/workflows/build-release.yml)
 
 Alternative Everdrive64 menu
 
@@ -18,7 +18,7 @@ Furthermore adrianopteodoro made an updated docker. which can be found here [ghc
 
 ### Build `Altra64`
 
-To build the Rom
+To build the R.O.M.
 
 from the projects root directory, with docker installed
 
@@ -28,7 +28,7 @@ or
 
 ``$ docker run --rm -v "$(pwd):/build" ghcr.io/adrianopteodoro/altra64:docker make``
 
-If it all worked, you will find `OS64.v64`/`OS64P.v64` in the `bin` directory.
+If it all worked, you will find `OS64P.v64` in the `bin` directory.
 
 ### Clean `Altra64`
 
@@ -37,7 +37,9 @@ Finally, we can clean the build objects from the project
 from the projects root directory
 
 ``$ docker run --rm -v "$(pwd):/build" moparisthebest/altra64-dev make clean``
+
 or
+
 ``$ docker run --rm -v "$(pwd):/build" ghcr.io/adrianopteodoro/altra64:docker make clean``
 
 Enjoy!
