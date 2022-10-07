@@ -54,14 +54,8 @@ To build the R.O.M.
 from the projects root directory, with docker installed
 
 ```
-docker run --rm -v "$(pwd):/build" moparisthebest/altra64-dev make
+docker run --rm -v "$(pwd):/build" ghcr.io/ariahiro64/altra64:master make`
 ```
-
-or
-
-```
-docker run --rm -v "$(pwd):/build" ghcr.io/adrianopteodoro/altra64:docker make`
-``
 
 If it all worked, you will find `OS64P.v64` in the `bin` directory.
 
