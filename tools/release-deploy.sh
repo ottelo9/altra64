@@ -10,14 +10,14 @@ if [ ! -f "$EXEC_DIR/bin/OS64P.v64" ]; then
     exit 1
 fi
 
-mkdir -p "$EXEC_DIR/release/ED64P/ED64P/CFG" "$EXEC_DIR/release/ED64P/ED64P/CHEATS" "$EXEC_DIR/release/ED64P/ED64P/SDSAVE" "$EXEC_DIR/release/ED64P/ED64P/WALLPAPER"
-cp "$EXEC_DIR/bin/OS64P.v64" "$EXEC_DIR/release/ED64P/ED64P"
-cp "$EXEC_DIR/res/ALT64.INI" "$EXEC_DIR/release/ED64P/ED64P"
-cp "$EXEC_DIR/res/WALLPAPER/bg.bmp" "$EXEC_DIR/release/ED64P/ED64P/WALLPAPER"
-cp "$EXEC_DIR/res/emulators/gb.v64" "$EXEC_DIR/release/ED64P/ED64P"
-cp "$EXEC_DIR/res/emulators/neon64bu.rom" "$EXEC_DIR/release/ED64P/ED64P"
-cp "$EXEC_DIR/res/emulators/ultraMSX2.z64" "$EXEC_DIR/release/ED64P/ED64P"
-cp "$EXEC_DIR/res/emulators/UltraSMS/z64" "$EXEC_DIR/release/ED64P/ED64P"
+mkdir -p "$EXEC_DIR/release/ED64P/CFG" "$EXEC_DIR/release/ED64P/CHEATS" "$EXEC_DIR/release/ED64P/SDSAVE" "$EXEC_DIR/release/ED64P/WALLPAPER"
+cp "$EXEC_DIR/bin/OS64P.v64" "$EXEC_DIR/release/ED64P/"
+cp "$EXEC_DIR/res/ALT64.INI" "$EXEC_DIR/release/ED64P/"
+cp "$EXEC_DIR/res/WALLPAPER/bg.bmp" "$EXEC_DIR/release/ED64P/WALLPAPER"
+cp "$EXEC_DIR/res/emulators/gb.v64" "$EXEC_DIR/release/ED64P"
+cp "$EXEC_DIR/res/emulators/neon64bu.rom" "$EXEC_DIR/release/ED64P"
+cp "$EXEC_DIR/res/emulators/ultraMSX2.z64" "$EXEC_DIR/release/ED64P"
+cp "$EXEC_DIR/res/emulators/UltraSMS/z64" "$EXEC_DIR/release/ED64P"
 cd "$EXEC_DIR/release"
 
 zip -9 -r $RELEASE_ARTIFACT .
