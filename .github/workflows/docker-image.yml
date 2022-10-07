@@ -1,6 +1,7 @@
 name: Build docker dev build image
 
-on: workflow_dispatch:
+on: 
+  workflow_dispatch:
     branches: ['docker']
 
 env:
