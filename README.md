@@ -9,12 +9,15 @@ originally written by saturnu, and released on the
 [Everdrive64 forum](http://krikzz.com/forum/index.php?topic=816.0).
 ## Setup
 
-```
-Format your SD card to fat32.
-Extract ED64P.zip into the rout of your sd card.
-Change ALT64.ini To your hearts content.
-Add leagally obtained ROMs
-```
+1, Format your SD card to fat32.
+
+2, Extract ED64P.zip into the rout of your sd card.
+
+3, Change ALT64.ini To your hearts content.
+
+4, Add leagally obtained ROMs
+
+5, Insert the SD card into the ED64plus and enjoy
 
 ## Controls
 
@@ -40,9 +43,9 @@ L+R delete files
 
 If you want to build the menu, you need an n64 toolchain. This is terrible to build, moparisthebest ended up creating a Dockerfile in the docker folder, instructions included in it.
 
-Or if you trust him, you can use the one he built and pushed to docker hub, [moparisthebest/altra64-dev](https://hub.docker.com/r/moparisthebest/altra64-dev)
+Or if you him and I, you can use the one I built and pushed to ghcr.io, which can be found [here](https://github.com/ariahiro64/altra64/pkgs/container/altra64)
 
-Furthermore adrianopteodoro made an updated docker. which can be found here [ghcr.io/adrianopteodoro/altra64:docker](https://github.com/adrianopteodoro/altra64/pkgs/container/altra64)
+Furthermore adrianopteodoro Automated the build proccess. Builds can be found [here](https://github.com/ariahiro64/altra64/actions)
 
 ### Build `Altra64`
 
@@ -50,11 +53,15 @@ To build the R.O.M.
 
 from the projects root directory, with docker installed
 
-``$ docker run --rm -v "$(pwd):/build" moparisthebest/altra64-dev make``
+```
+docker run --rm -v "$(pwd):/build" moparisthebest/altra64-dev make
+```
 
 or
 
-``$ docker run --rm -v "$(pwd):/build" ghcr.io/adrianopteodoro/altra64:docker make``
+```
+docker run --rm -v "$(pwd):/build" ghcr.io/adrianopteodoro/altra64:docker make`
+``
 
 If it all worked, you will find `OS64P.v64` in the `bin` directory.
 
@@ -64,10 +71,8 @@ Finally, we can clean the build objects from the project
 
 from the projects root directory
 
-``$ docker run --rm -v "$(pwd):/build" moparisthebest/altra64-dev make clean``
-
-or
-
-``$ docker run --rm -v "$(pwd):/build" ghcr.io/adrianopteodoro/altra64:docker make clean``
+```
+docker run --rm -v "$(pwd):/build" ghcr.io/ariahiro64/altra64:docker make clean
+```
 
 ### Big thanks to the countless people who make altra64 possible!!! Enjoy!
