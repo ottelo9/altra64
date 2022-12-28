@@ -9,6 +9,7 @@
 #include "sys.h"
 #include "rom.h"
 #include "cic.h"
+#include <libdragon.h>
 
 void pif_boot()
 {
@@ -76,4 +77,23 @@ u8 getCicType(u8 bios_cic) {
     }
 
     return cic_chip;
+}
+
+//send game id for n64digital hdmi mod
+//source: https://gitlab.com/pixelfx-public/n64-game-id
+void send_game_id(uint8_t* crc_hi, uint8_t* crc_lo, uint8_t media_format, uint8_t country_id)
+{
+    #define N64_CONTROLLER_PORT 0
+    #define GAME_ID_COMMAND 0x1D
+    
+    uint8_t out[10];
+    uint8_t dummy[1];
+
+    memcpy(out, crc_hi, 4);
+    memcpy(&out[4], crc_lo, 4);
+
+    out[8] = media_format;
+    out[9] = country_id;
+
+    execute_raw_command(N64_CONTROLLER_PORT, GAME_ID_COMMAND, sizeof(out), sizeof(dummy), out, dummy);
 }

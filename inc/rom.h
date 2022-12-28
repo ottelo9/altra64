@@ -158,4 +158,5 @@ void swap_header(unsigned char* header, int loadlength);
 
 u8 getCicType(u8 bios_cic);
 
+void send_game_id(uint8_t* crc_hi, uint8_t* crc_lo, uint8_t media_format, uint8_t country_id);
 #endif
