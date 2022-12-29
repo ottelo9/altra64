@@ -1407,16 +1407,9 @@ void loadrom(display_context_t disp, u8 *buff, int fast)
             sprintf(cartID_str, "ID: %c%c%c%c", headerdata[0x3B], headerdata[0x3C], headerdata[0x3D], headerdata[0x3E]);
             printText(cartID_str, 3, -1, disp);
 			
-			//read and send game id for N64Digital (by ottelo)
+			//show game id
             sprintf(cartID_str, "GameID: %c%c%c%c%c%c%c%c%c%c", headerdata[0x10], headerdata[0x11], headerdata[0x12], headerdata[0x13], headerdata[0x14], headerdata[0x15], headerdata[0x16], headerdata[0x17], headerdata[0x3B], headerdata[0x3E]);
             printText(cartID_str, 3, -1, disp);
-			send_game_id(
-				(uint8_t[]){ headerdata[0x10], headerdata[0x11], headerdata[0x12], headerdata[0x13], }, // CRC_HI
-				(uint8_t[]){ headerdata[0x14], headerdata[0x15], headerdata[0x16], headerdata[0x17], }, // CRC_LO
-				headerdata[0x3B],                                   // ROM type
-				headerdata[0x3E]                                    // Country code
-			);
-
         }
 
         int cic, save;
@@ -1512,6 +1505,13 @@ void loadrom(display_context_t disp, u8 *buff, int fast)
         if(result == FR_OK)
         {
             printText("Rom loaded", 3, -1, disp);
+            //read and send game id for N64Digital
+			send_game_id(
+				(uint8_t[]){ headerdata[0x10], headerdata[0x11], headerdata[0x12], headerdata[0x13], }, // CRC_HI
+				(uint8_t[]){ headerdata[0x14], headerdata[0x15], headerdata[0x16], headerdata[0x17], }, // CRC_LO
+				headerdata[0x3B],                                   // ROM type
+				headerdata[0x3E]                                    // Country code
+			);
 
             if (!fast)
             {
