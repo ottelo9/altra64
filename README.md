@@ -7,7 +7,9 @@ Alternative Everdrive64 menu + ottelo Fork with Game ID Support (N64Digital)
 `Altra64` is an open source menu for [Everdrive64](http://krikzz.com/) and ed64+ and is based on a fork of alt64 which was
 originally written by saturnu, and released on the
 [Everdrive64 forum](http://krikzz.com/forum/index.php?topic=816.0). ariahiro64 forked the Altra64 repo and add new features/bug fixes to it. Now I (ottelo) forked the this repo from ariahiro64 as well and added new things like the Game ID feature for N64Digital HDMI mod (source https://gitlab.com/pixelfx-public/n64-game-id).
-![IMG_1239](https://user-images.githubusercontent.com/33122175/210060057-8a74d214-5ab9-48f9-95f8-f99e7f51f136.jpg)
+
+![IMG_1239](https://user-images.githubusercontent.com/33122175/210060118-2cad804e-8365-490e-b08a-b1915fdadf47.jpg)
+
 
 
 ## Setup
