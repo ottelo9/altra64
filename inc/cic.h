@@ -16,5 +16,6 @@
 #define CIC_5167 7 //64dd conv
 
 int get_cic(unsigned char *rom_data);
+char* get_cic_string(unsigned char *rom_data);
 
 #endif

@@ -974,7 +974,7 @@ void romInfoScreen(display_context_t disp, u8 *buff, int silent)
 
             //rom name
             sprintf(rom_name, "%s", trim(rom_name));
-            printText(rom_name, 11, 19, disp);
+            printText(rom_name, 11, 18, disp);
 
             //rom size
             sprintf(rom_name, "Size: %iMB", fsizeMB);
@@ -1015,8 +1015,8 @@ void romInfoScreen(display_context_t disp, u8 *buff, int silent)
             printText(cartID_str, 11, -1, disp);
 
 			//show game id
-            sprintf(cartID_str, "GameID: %x %x %x %x %x %x %x %x %x %x", headerdata[0x10], headerdata[0x11], headerdata[0x12], headerdata[0x13], headerdata[0x14], headerdata[0x15], headerdata[0x16], headerdata[0x17], headerdata[0x3B], headerdata[0x3E]);
-            printText(cartID_str, 11, -1, disp);   
+            //sprintf(cartID_str, "GameID: %x %x %x %x %x %x %x %x %x %x", headerdata[0x10], headerdata[0x11], headerdata[0x12], headerdata[0x13], headerdata[0x14], headerdata[0x15], headerdata[0x16], headerdata[0x17], headerdata[0x3B], headerdata[0x3E]);
+            //printText(cartID_str, 11, -1, disp);   
         }
 
         int cic, save;
@@ -1035,8 +1035,9 @@ void romInfoScreen(display_context_t disp, u8 *buff, int silent)
                 sprintf(save_type_str, "Save: %s", saveTypeToExtension(save, ext_type));
                 printText(save_type_str, 11, -1, disp);
 
-                unsigned char cic_type_str[12];
-
+                unsigned char cic_type_str[32];
+                cic_type_str = get_cic_string(&headerdata[0x40]);
+                /*
                 switch (cic)
                 {
                     case 4:
@@ -1048,7 +1049,7 @@ void romInfoScreen(display_context_t disp, u8 *buff, int silent)
                     default:
                     sprintf(cic_type_str, "CIC: CIC-610%i", cic);
                     break;
-                }
+                }*/
 
                 printText(cic_type_str, 11, -1, disp);
             }

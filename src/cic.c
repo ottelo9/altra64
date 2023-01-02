@@ -212,3 +212,36 @@ int pifram_x105_response_test() {
       }
   
   }
+
+char* get_cic_string(unsigned char *rom_data)
+{
+  uint32_t crc = si_crc32(rom_data + 0x40, 0x1000 - 0x40);
+  uint32_t aleck64crc = si_crc32(rom_data + 0x40, 0xC00 - 0x40);
+  static char cText32[32];
+
+  if (aleck64crc == CRC_NUS_5101) 
+    return "NUS_5101";        
+
+  switch (crc) 
+  {
+    case CRC_NUS_6101:
+      return "CIC-6101"
+    case CRC_NUS_7102:
+      return "CIC-7102";
+    case CRC_NUS_6102:
+      return "CIC-6102";
+    case CRC_NUS_6103:
+      return "CIC-6103"
+    case CRC_NUS_6105:
+      return "CIC-6105"
+    case CRC_NUS_6106:
+      return "CIC-6106"
+    case CRC_NUS_8303:
+      return "CIC-8303"
+    default:
+      sprintf(cText32, "? %#08x", crc)
+      return cText32;
+  }
+
+  return "";
+}
