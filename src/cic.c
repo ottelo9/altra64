@@ -225,21 +225,21 @@ char* get_cic_string(unsigned char *rom_data)
   switch (crc) 
   {
     case CRC_NUS_6101:
-      return "CIC-6101"
+      return "CIC-6101";
     case CRC_NUS_7102:
       return "CIC-7102";
     case CRC_NUS_6102:
       return "CIC-6102";
     case CRC_NUS_6103:
-      return "CIC-6103"
+      return "CIC-6103";
     case CRC_NUS_6105:
-      return "CIC-6105"
+      return "CIC-6105";
     case CRC_NUS_6106:
-      return "CIC-6106"
+      return "CIC-6106";
     case CRC_NUS_8303:
-      return "CIC-8303"
+      return "CIC-8303";
     default:
-      sprintf(cText32, "? %#08x", crc)
+      sprintf(cText32, "? %#08x", crc);
       return cText32;
   }
 
