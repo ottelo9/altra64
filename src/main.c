@@ -1035,9 +1035,8 @@ void romInfoScreen(display_context_t disp, u8 *buff, int silent)
                 sprintf(save_type_str, "Save: %s", saveTypeToExtension(save, ext_type));
                 printText(save_type_str, 11, -1, disp);
 
-                unsigned char cic_type_str[32];
-                cic_type_str = get_cic_string(&headerdata[0x40]);
-                /*
+                /*unsigned char cic_type_str[12];               
+                
                 switch (cic)
                 {
                     case 4:
@@ -1051,7 +1050,7 @@ void romInfoScreen(display_context_t disp, u8 *buff, int silent)
                     break;
                 }*/
 
-                printText(cic_type_str, 11, -1, disp);
+                printText(get_cic_string(&headerdata[0x40]), 11, -1, disp);
             }
             //thanks for the db :>
             //cart was found, use CIC and SaveRAM type
