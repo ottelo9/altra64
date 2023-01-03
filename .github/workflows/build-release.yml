@@ -1,6 +1,6 @@
 name: Build and release
 
-on: [ push, workflow_dispatch ]
+#on: [ push, workflow_dispatch ]
 
 env:
   REGISTRY: ghcr.io
