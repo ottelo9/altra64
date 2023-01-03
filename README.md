@@ -2,13 +2,18 @@
 
 [![Build and release](https://github.com/ariahiro64/altra64/actions/workflows/build-release.yml/badge.svg)](https://github.com/ariahiro64/altra64/actions/workflows/build-release.yml)[![Build docker dev build image](https://github.com/ariahiro64/altra64/actions/workflows/docker-image.yml/badge.svg)](https://github.com/ariahiro64/altra64/actions/workflows/docker-image.yml)
 
-Alternative Everdrive64 menu + ottelo Fork with Game ID Support (N64Digital)
+Alternative Everdrive64 menu forked from ariahiro64 (Dez 2022) with this new features:
+- Game ID Support (N64Digital)
+- Auto Region detection (via Country Code). Altra64 previously had problems with a few PAL games (message: This game pak is only available for the PAL market or black screen)
 
 `Altra64` is an open source menu for [Everdrive64](http://krikzz.com/) and ed64+ and is based on a fork of alt64 which was
 originally written by saturnu, and released on the
 [Everdrive64 forum](http://krikzz.com/forum/index.php?topic=816.0). ariahiro64 forked the Altra64 repo and add new features/bug fixes to it. Now I (ottelo) forked the this repo from ariahiro64 as well and added new things like the Game ID feature for N64Digital HDMI mod (source https://gitlab.com/pixelfx-public/n64-game-id).
 
 ![IMG_1239](https://user-images.githubusercontent.com/33122175/210060118-2cad804e-8365-490e-b08a-b1915fdadf47.jpg)
+![IMG_1297](https://user-images.githubusercontent.com/33122175/210409803-6f39c7ac-0d92-4804-90a9-6f2bf233e2d3.jpg)
+
+
 
 
 
