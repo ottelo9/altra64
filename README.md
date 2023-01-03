@@ -10,7 +10,10 @@ Alternative Everdrive64 menu forked from ariahiro64 (Dez 2022) with this new fea
 originally written by saturnu, and released on the
 [Everdrive64 forum](http://krikzz.com/forum/index.php?topic=816.0). ariahiro64 forked the Altra64 repo and add new features/bug fixes to it. Now I (ottelo) forked the this repo from ariahiro64 as well and added new things like the Game ID feature for N64Digital HDMI mod (source https://gitlab.com/pixelfx-public/n64-game-id).
 
+N64Digital now detects the game
 ![IMG_1239](https://user-images.githubusercontent.com/33122175/210060118-2cad804e-8365-490e-b08a-b1915fdadf47.jpg)
+
+ED64P Rom Info Screen with new country and region info
 ![IMG_1297](https://user-images.githubusercontent.com/33122175/210409803-6f39c7ac-0d92-4804-90a9-6f2bf233e2d3.jpg)
 
 
