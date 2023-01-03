@@ -97,3 +97,65 @@ void send_game_id(uint8_t* crc_hi, uint8_t* crc_lo, uint8_t media_format, uint8_
 
     execute_raw_command(N64_CONTROLLER_PORT, GAME_ID_COMMAND, sizeof(out), sizeof(dummy), out, dummy);
 }
+
+// get the country and region string from country code "headerdata[0x3E]" (region type via www.bubblevision.com/PAL-NTSC.htm)
+// NTSC, PAL, MPAL or unknown 
+void get_country_and_region(unsigned char ccode, char* region_string)
+{
+    switch (ccode)
+    {
+        case '7': strcpy(rom_name, "Beta"); break;               
+        case 'A': strcpy(rom_name, "Asia-NTSC"); break;          
+        case 'B': strcpy(rom_name, "Brazil-MPAL"); break;              
+        case 'C': strcpy(rom_name, "China-PAL"); break;
+        case 'D': strcpy(rom_name, "Germany-PAL"); break;
+        case 'E': strcpy(rom_name, "NorthAmerica-NTSC"); break;
+        case 'F': strcpy(rom_name, "France-PAL"); break;
+        case 'G': strcpy(rom_name, "Gateway64-NTSC"); break;
+        case 'H': strcpy(rom_name, "Netherlands-PAL"); break;
+        case 'I': strcpy(rom_name, "Italy-PAL"); break;
+        case 'J': strcpy(rom_name, "Japan-NTSC"); break;
+        case 'K': strcpy(rom_name, "Korea-NTSC"); break;
+        case 'L': strcpy(rom_name, "Gateway64-PAL"); break;
+        case 'N': strcpy(rom_name, "Canada-NTSC"); break;
+        case 'P': strcpy(rom_name, "Europe-PAL"); break;
+        case 'S': strcpy(rom_name, "Spain-PAL"); break;
+        case 'U': strcpy(rom_name, "Australia-PAL"); break;
+        case 'W': strcpy(rom_name, "Scandinavia-PAL"); break;
+        case 'X': strcpy(rom_name, "Europe-PAL"); break;
+        case 'Y': strcpy(rom_name, "Europe-PAL"); break;
+        case 'Z': strcpy(rom_name, "Europe-PAL"); break;
+        default:  strcpy(rom_name, "No Country");
+    }
+}
+
+// get the region from country code "headerdata[0x3E]" (region type via www.bubblevision.com/PAL-NTSC.htm)
+unsigned char get_region(unsigned char ccode)
+{
+    switch (ccode)
+    {
+        case '7': return REGION_UNKNOWN;               
+        case 'A': return REGION_NTSC;          
+        case 'B': return REGION_PAL_M;              
+        case 'C': return REGION_PAL;
+        case 'D': return REGION_PAL;
+        case 'E': return REGION_NTSC;
+        case 'F': return REGION_PAL;
+        case 'G': return REGION_NTSC;
+        case 'H': return REGION_PAL;
+        case 'I': return REGION_PAL;
+        case 'J': return REGION_NTSC;
+        case 'K': return REGION_NTSC;
+        case 'L': return REGION_PAL;
+        case 'N': return REGION_NTSC;
+        case 'P': return REGION_PAL;
+        case 'S': return REGION_PAL;
+        case 'U': return REGION_PAL;
+        case 'W': return REGION_PAL;
+        case 'X': return REGION_PAL;
+        case 'Y': return REGION_PAL;
+        case 'Z': return REGION_PAL;
+        default:  return REGION_UNKNOWN;
+    }
+    return REGION_UNKNOWN;
+}

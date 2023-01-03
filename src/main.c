@@ -980,39 +980,14 @@ void romInfoScreen(display_context_t disp, u8 *buff, int silent)
             sprintf(rom_name, "Size: %iMB", fsizeMB);
             printText(rom_name, 11, -1, disp);
 
-
             //unique cart id for gametype
             unsigned char cartID_str[64];
             sprintf(cartID_str, "ID: %c%c%c%c", headerdata[0x3B], headerdata[0x3C], headerdata[0x3D], headerdata[0x3E]);
             printText(cartID_str, 11, -1, disp);
 
-            //show country code
-            switch (headerdata[0x3E])
-            {
-                case 0x37: strcpy(rom_name, "Beta"); break;
-                case 0x41: strcpy(rom_name, "Asian (NTSC)"); break;
-                case 0x42: strcpy(rom_name, "Brazilian"); break;
-                case 0x43: strcpy(rom_name, "Chinese"); break;
-                case 0x44: strcpy(rom_name, "German"); break;
-                case 0x45: strcpy(rom_name, "North America"); break;
-                case 0x46: strcpy(rom_name, "French"); break;
-                case 0x47: strcpy(rom_name, "Gateway 64 (NTSC)"); break;
-                case 0x48: strcpy(rom_name, "Dutch"); break;
-                case 0x49: strcpy(rom_name, "Italian"); break;
-                case 0x4A: strcpy(rom_name, "Japanese"); break;
-                case 0x4B: strcpy(rom_name, "Korean"); break;
-                case 0x4C: strcpy(rom_name, "Gateway 64 (PAL)"); break;
-                case 0x4E: strcpy(rom_name, "Canadian"); break;
-                case 0x50: strcpy(rom_name, "European"); break;
-                case 0x53: strcpy(rom_name, "Spanish"); break;
-                case 0x55: strcpy(rom_name, "Australian"); break;
-                case 0x57: strcpy(rom_name, "Scandinavian"); break;
-                case 0x58: strcpy(rom_name, "European"); break;
-                case 0x59: strcpy(rom_name, "European"); break;
-                default:   strcpy(rom_name, "???");
-            }
-            sprintf(cartID_str, "Country: %s", rom_name);
-            printText(cartID_str, 11, -1, disp);
+            //show country code (region type via www.bubblevision.com/PAL-NTSC.htm)
+            get_country_and_region(headerdata[0x3E], rom_name);
+            printText(rom_name, 11, -1, disp);
 
 			//show game id
             //sprintf(cartID_str, "GameID: %x %x %x %x %x %x %x %x %x %x", headerdata[0x10], headerdata[0x11], headerdata[0x12], headerdata[0x13], headerdata[0x14], headerdata[0x15], headerdata[0x16], headerdata[0x17], headerdata[0x3B], headerdata[0x3E]);
@@ -1035,7 +1010,7 @@ void romInfoScreen(display_context_t disp, u8 *buff, int silent)
                 sprintf(save_type_str, "Save: %s", saveTypeToExtension(save, ext_type));
                 printText(save_type_str, 11, -1, disp);
 
-                /*unsigned char cic_type_str[12];               
+                unsigned char cic_type_str[12];               
                 
                 switch (cic)
                 {
@@ -1048,9 +1023,9 @@ void romInfoScreen(display_context_t disp, u8 *buff, int silent)
                     default:
                     sprintf(cic_type_str, "CIC: CIC-610%i", cic);
                     break;
-                }*/
+                }
 
-                printText(get_cic_string(&headerdata[0x40]), 11, -1, disp);
+                printText(cic_type_str, 11, -1, disp);
             }
             //thanks for the db :>
             //cart was found, use CIC and SaveRAM type
@@ -1440,8 +1415,12 @@ void loadrom(display_context_t disp, u8 *buff, int fast)
             printText(cartID_str, 3, -1, disp);
 			
 			//show game id
-            sprintf(cartID_str, "GameID: %x %x %x %x %x %x %x %x %x %x", headerdata[0x10], headerdata[0x11], headerdata[0x12], headerdata[0x13], headerdata[0x14], headerdata[0x15], headerdata[0x16], headerdata[0x17], headerdata[0x3B], headerdata[0x3E]);
-            printText(cartID_str, 3, -1, disp);
+            //sprintf(cartID_str, "GameID: %x %x %x %x %x %x %x %x %x %x", headerdata[0x10], headerdata[0x11], headerdata[0x12], headerdata[0x13], headerdata[0x14], headerdata[0x15], headerdata[0x16], headerdata[0x17], headerdata[0x3B], headerdata[0x3E]);
+            //printText(cartID_str, 3, -1, disp);
+
+            //show country code (region type via www.bubblevision.com/PAL-NTSC.htm)
+            get_country_and_region(headerdata[0x3E], rom_name);
+            printText(rom_name, 11, -1, disp);
         }
 
         int cic, save;
@@ -1488,6 +1467,10 @@ void loadrom(display_context_t disp, u8 *buff, int fast)
         cheats_on = rom_config[4];
         checksum_fix_on = rom_config[5];
         boot_country = rom_config[7]; //boot_block
+
+        //auto region detection
+        if (force_tv == 0)
+            force_tv = get_region(headerdata[0x3E]);
 
         if (gbload == 1)
             boot_save = 1;
