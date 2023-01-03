@@ -10,6 +10,7 @@
 #include "rom.h"
 #include "cic.h"
 #include <libdragon.h>
+#include <string.h>
 
 void pif_boot()
 {
@@ -104,28 +105,28 @@ void get_country_and_region(unsigned char ccode, char* region_string)
 {
     switch (ccode)
     {
-        case '7': strcpy(rom_name, "Beta"); break;               
-        case 'A': strcpy(rom_name, "Asia-NTSC"); break;          
-        case 'B': strcpy(rom_name, "Brazil-MPAL"); break;              
-        case 'C': strcpy(rom_name, "China-PAL"); break;
-        case 'D': strcpy(rom_name, "Germany-PAL"); break;
-        case 'E': strcpy(rom_name, "NorthAmerica-NTSC"); break;
-        case 'F': strcpy(rom_name, "France-PAL"); break;
-        case 'G': strcpy(rom_name, "Gateway64-NTSC"); break;
-        case 'H': strcpy(rom_name, "Netherlands-PAL"); break;
-        case 'I': strcpy(rom_name, "Italy-PAL"); break;
-        case 'J': strcpy(rom_name, "Japan-NTSC"); break;
-        case 'K': strcpy(rom_name, "Korea-NTSC"); break;
-        case 'L': strcpy(rom_name, "Gateway64-PAL"); break;
-        case 'N': strcpy(rom_name, "Canada-NTSC"); break;
-        case 'P': strcpy(rom_name, "Europe-PAL"); break;
-        case 'S': strcpy(rom_name, "Spain-PAL"); break;
-        case 'U': strcpy(rom_name, "Australia-PAL"); break;
-        case 'W': strcpy(rom_name, "Scandinavia-PAL"); break;
-        case 'X': strcpy(rom_name, "Europe-PAL"); break;
-        case 'Y': strcpy(rom_name, "Europe-PAL"); break;
-        case 'Z': strcpy(rom_name, "Europe-PAL"); break;
-        default:  strcpy(rom_name, "No Country");
+        case '7': strcpy(region_string, "Beta"); break;               
+        case 'A': strcpy(region_string, "Asia-NTSC"); break;          
+        case 'B': strcpy(region_string, "Brazil-MPAL"); break;              
+        case 'C': strcpy(region_string, "China-PAL"); break;
+        case 'D': strcpy(region_string, "Germany-PAL"); break;
+        case 'E': strcpy(region_string, "NorthAmerica-NTSC"); break;
+        case 'F': strcpy(region_string, "France-PAL"); break;
+        case 'G': strcpy(region_string, "Gateway64-NTSC"); break;
+        case 'H': strcpy(region_string, "Netherlands-PAL"); break;
+        case 'I': strcpy(region_string, "Italy-PAL"); break;
+        case 'J': strcpy(region_string, "Japan-NTSC"); break;
+        case 'K': strcpy(region_string, "Korea-NTSC"); break;
+        case 'L': strcpy(region_string, "Gateway64-PAL"); break;
+        case 'N': strcpy(region_string, "Canada-NTSC"); break;
+        case 'P': strcpy(region_string, "Europe-PAL"); break;
+        case 'S': strcpy(region_string, "Spain-PAL"); break;
+        case 'U': strcpy(region_string, "Australia-PAL"); break;
+        case 'W': strcpy(region_string, "Scandinavia-PAL"); break;
+        case 'X': strcpy(region_string, "Europe-PAL"); break;
+        case 'Y': strcpy(region_string, "Europe-PAL"); break;
+        case 'Z': strcpy(region_string, "Europe-PAL"); break;
+        default:  strcpy(region_string, "No Country");
     }
 }
 
