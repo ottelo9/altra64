@@ -14,21 +14,19 @@ void menu_about(display_context_t disp)
     char firmware_str[32];
 
     sprintf(version_str, "Altra64: v%s", Altra64_GetVersionString());
-    printText(version_str, 9, 7, disp);
+    printText(version_str, 9, 7, disp);                                     //1
     sprintf(firmware_str, "ED64 firmware: v%03x", evd_getFirmVersion());
-    printText(firmware_str, 9, -1, disp);
-    printText("by JonesAlmighty", 9, -1, disp);
-    printText("Based on ALT64", 9, -1, disp);
-    printText("By Saturnu", 9, -1, disp);
-    printText("credits to:", 9, -1, disp);
-    printText("Jay Oster", 9, -1, disp);
-    printText("Krikzz", 9, -1, disp);
-    printText("Richard Weick", 9, -1, disp);
-    printText("ChillyWilly", 9, -1, disp);
-    printText("ShaunTaylor", 9, -1, disp);
-    printText("Conle        Z: Page 2", 9, -1, disp);
-    printText("AriaHiro64", 9, -1, disp);
-    printText("moparisthebest", 9, -1, disp);
-	printText("Skawo", 9, -1, disp);
-    printText("adrianopteodoro ", 9, -1, disp);
+    printText(firmware_str, 9, -1, disp);                                   //2
+    printText("by JonesAlmighty", 9, -1, disp);                             //3
+    printText("Based on ALT64 by Saturnu", 9, -1, disp);                    //4 
+    printText("Credits:", 9, -1, disp);                                     //5
+    printText("Jay Oster,Krikzz,", 9, -1, disp);                            //6
+    printText("Richard Weick,ChillyWilly,", 9, -1, disp);                   //7
+    printText("ShaunTaylor,Conle,", 9, -1, disp);                           //8
+    printText("adrianopteodoro,AriaHiro64,", 9, -1, disp);                  //9
+    printText("moparisthebest,Skawo,", 9, -1, disp);                        //10
+    printText("ottelo9", 9, -1, disp);                                      //11
+    printText(" ", 9, -1, disp);                                            //12
+    printText("Z: Next page", 9, -1, disp);                                 //13
+                                                                            //16 max!
 } //TODO: make scrolling text, should include libraries used.
