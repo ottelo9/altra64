@@ -329,7 +329,7 @@ void view_mpk(display_context_t disp)
 
     case ACCESSORY_MEMPAK:
         err = validate_mempak(0);
-        /*if (err)
+        if (err)
         {
             if (err == -3)
             {
@@ -343,7 +343,7 @@ void view_mpk(display_context_t disp)
                 printText("read error", 11, -1, disp);
             }
         }
-        else*/
+        else
         {
             printText("   ", 11, -1, disp);
             for (int j = 0; j < 16; j++)
