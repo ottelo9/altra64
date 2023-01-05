@@ -1,4 +1,4 @@
-# Altra64
+# Altra64 for ED64 Plus or ED64v1
 
 [![Build and release](https://github.com/ariahiro64/altra64/actions/workflows/build-release.yml/badge.svg)](https://github.com/ariahiro64/altra64/actions/workflows/build-release.yml)[![Build docker dev build image](https://github.com/ariahiro64/altra64/actions/workflows/docker-image.yml/badge.svg)](https://github.com/ariahiro64/altra64/actions/workflows/docker-image.yml)
 
