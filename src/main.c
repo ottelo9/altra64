@@ -3322,10 +3322,13 @@ void loadFile(display_context_t disp)
 
 void handleInput(display_context_t disp, sprite_t *contr)
 {
-    //request controller
+    //request controller 1 [0]
     controller_scan();
     struct controller_data keys = get_keys_down();
     struct controller_data keys_held = get_keys_held();
+
+    if( keys.c[0].err != ERROR_NONE )
+        return;
 
     if (keys.c[0].up || keys_held.c[0].up || keys_held.c[0].y > +25)
     {
