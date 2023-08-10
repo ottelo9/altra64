@@ -2,6 +2,10 @@
 
 [![Build and release](https://github.com/ariahiro64/altra64/actions/workflows/build-release.yml/badge.svg)](https://github.com/ariahiro64/altra64/actions/workflows/build-release.yml)[![Build docker dev build image](https://github.com/ariahiro64/altra64/actions/workflows/docker-image.yml/badge.svg)](https://github.com/ariahiro64/altra64/actions/workflows/docker-image.yml)
 
+Note from 2023-08-10:
+Actually this fork includes all my changes + lot of fixes. So take this better Altra64:
+https://github.com/Suprapote/Altra64
+
 Alternative Everdrive64 menu forked from ariahiro64 (Dez 2022) with this new features:
 - Game ID Support (N64Digital)
 - Auto Region detection (via Country Code). Altra64 previously had problems with a few PAL games (message: This game pak is only available for the PAL market or black screen)
